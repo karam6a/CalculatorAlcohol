@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using MaterialSkin.Controls;
 namespace CalculatorAlcohol
 {
     /// <summary>
@@ -23,8 +24,12 @@ namespace CalculatorAlcohol
         public MainWindow()
         {
             InitializeComponent();
+            quantityComboBox.IsDropDownOpen = false;
         }
 
+        private void typeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
 }

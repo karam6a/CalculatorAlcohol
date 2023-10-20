@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CalculatorAlcohol
 {
@@ -99,7 +100,7 @@ namespace CalculatorAlcohol
         public static string calculateAlcohol(string containerType, int containerCapacity, int numberOfContainers, int alcoholProcent)
         {
             return "Container type: " + containerType + "\nCapacity: " + containerCapacity + "\nQuantity: " + numberOfContainers + "\nAlcohol procent: " + alcoholProcent;
-        }
+        }    
     }
 }
 
