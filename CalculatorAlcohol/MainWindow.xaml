@@ -19,7 +19,7 @@
     <Grid Width="330" Margin="0,0,0,-1">
         <Label Content="Alcohol calculator" Margin="0,10,0,0" VerticalAlignment="Top" Width="284" FontSize="24" FontFamily="Century" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <ComboBox x:Name="typeComboBox"   materialDesign:HintAssist.Hint="Glass type"
-                  HorizontalAlignment="Left" Margin="24,91,0,0" VerticalAlignment="Top" Width="175" Height="40" FontFamily="Century" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" UseLayoutRounding="False" Padding="0,4,0,4" IsEditable="True" SelectionChanged="typeComboBox_SelectionChanged">
+                  HorizontalAlignment="Left" Margin="24,91,0,0" VerticalAlignment="Top" Width="175" Height="40" FontFamily="Century" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" UseLayoutRounding="False" Padding="0,4,0,4" IsEditable="True">
             <ComboBoxItem Content="Shot glass"/>
             <ComboBoxItem Content="Glass"/>
             <ComboBoxItem Content="Goblet"/>
@@ -29,8 +29,7 @@
             <ComboBoxItem Content="Pitcher"/>
             <ComboBoxItem Content="Bottle" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </ComboBox>
-        <ComboBox x:Name="quantityComboBox" materialDesign:HintAssist.Hint="Quantity"
-                  HorizontalAlignment="Left" Margin="222,91,0,0" VerticalAlignment="Top" Width="86" RenderTransformOrigin="0.566,0.566" Height="40" FontFamily="Century" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" IsDropDownOpen="True" IsEditable="True" HorizontalContentAlignment="Center">
+        <ComboBox x:Name="quantityComboBox" materialDesign:HintAssist.Hint="Quantity" HorizontalAlignment="Left" Margin="222,91,0,0" VerticalAlignment="Top" Width="86" RenderTransformOrigin="0.566,0.566" Height="40" FontFamily="Century" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" IsDropDownOpen="True" IsEditable="True" HorizontalContentAlignment="Center">
             <AutomationProperties.LabeledBy>
                 <Label/>
             </AutomationProperties.LabeledBy>
@@ -47,10 +46,10 @@
         </ComboBox>
 
 
-        <TextBox HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Volume in ml"  Margin="23,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="40" FontFamily="Century" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox HorizontalAlignment="Left" Margin="178,168,0,0" materialDesign:HintAssist.Hint="%" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="40" FontFamily="Century" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button Content="Calculate" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Height="40" Width="285" FontFamily="Century" FontSize="18"/>
-        <Label Content="Label" HorizontalAlignment="Center" Margin="0,325,0,0" VerticalAlignment="Top" Width="284" Height="89" FontFamily="Century"/>
+        <TextBox x:Name="volumeTextField" HorizontalAlignment="Left" materialDesign:HintAssist.Hint="Volume in ml"  Margin="23,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="40" FontFamily="Century" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="percentTextBox" HorizontalAlignment="Left" Margin="178,168,0,0" materialDesign:HintAssist.Hint="%" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" Height="40" FontFamily="Century" FontSize="14" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button Content="Calculate" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Height="40" Width="285" FontFamily="Century" FontSize="18" Click="Button_Click"/>
+        <Label x:Name="outputLabel" Content="Label" HorizontalAlignment="Center" Margin="0,325,0,0" VerticalAlignment="Top" Width="284" Height="89" FontFamily="Century"/>
 
     </Grid>
 </Window>
