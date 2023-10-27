@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CalculatorAlcohol
 {
@@ -12,24 +13,45 @@ namespace CalculatorAlcohol
         private static Dictionary<string, int> capacityDictionary = new Dictionary<string, int>
         {
             { "Shot glass", 50 },
+            { "Wine glass", 200 },
             { "Glass", 250 },
             { "Goblet", 300 },
             { "Mug", 400},
             { "Beer mug", 500 },
-            { "Wine glass", 200 },
-            { "Pitcher", 2000 },
-            { "Bottle", 1000 }
+            { "Bottle", 1000 },
+            { "Pitcher", 2000 }
         };
+
+        public static void fillComboBoxFromDictionary(ComboBox comboBox)
+        {
+            comboBox.Items.Clear();
+            foreach (var kvp in capacityDictionary)
+            {
+                comboBox.Items.Add(kvp.Key);
+            }
+        }
+
+        public static int findContainerTypeInDictinory(string givenContainerType)
+        {
+            foreach (var kvp in capacityDictionary)
+            {
+                if (kvp.Key == givenContainerType)
+                {
+                    return kvp.Value;
+                }
+            }
+            return -1;
+        }
 
         public string ContainerType { get; set; } //Тип посуды
         public int ContainerCapacity { get; set; } //Вместимость посуды
         public int NumberOfContainers { get; set; } //Количество посуды
-        public int AlcoholProcent { get; set; } //Процент алкоголя
+        public float AlcoholProcent { get; set; } //Процент алкоголя
 
         //ВАЖНО! В конструктор давать информацию в последовательности: Тип, Вместимость, Количество, Процент
 
         //Конструктор, если известны все переменные
-        public Calculating(string containerType, int containerCapacity, int numberOfcontainers, int alcoholProcent) {
+        public Calculating(string containerType, int containerCapacity, int numberOfcontainers, float alcoholProcent) {
             ContainerType = containerType;
             ContainerCapacity = containerCapacity;
             NumberOfContainers = numberOfcontainers;
@@ -37,7 +59,7 @@ namespace CalculatorAlcohol
         }
 
         //Конструктор, если не известен обьем, но известен тип посуды
-        public Calculating(string containerType, int numberOfcontainers, int alcoholProcent)
+        public Calculating(string containerType, int numberOfcontainers, float alcoholProcent)
         {
             ContainerType = containerType;
             ContainerCapacity = capacityDictionary[containerType];
@@ -46,7 +68,7 @@ namespace CalculatorAlcohol
         }
 
         //Конструктор, если известен обьем, но не известен тип посуды
-        public Calculating(int containerCapacity, int numberOfcontainers, int alcoholProcent)
+        public Calculating(int containerCapacity, int numberOfcontainers, float alcoholProcent)
         {
             var matchingKey = capacityDictionary.FirstOrDefault(x => x.Value == containerCapacity).Key;
             if (matchingKey != null)
@@ -57,7 +79,7 @@ namespace CalculatorAlcohol
             else
             {
                 // Значение не найдено, код пробует найти близжайший вариант посуды с данной емкостью
-                ContainerType = findContainerType(containerCapacity) + " (auto selected by the program)";
+                ContainerType = findContainerType(containerCapacity) + " (auto sel.)";
             }
             ContainerCapacity = containerCapacity;
             NumberOfContainers = numberOfcontainers;
@@ -91,16 +113,18 @@ namespace CalculatorAlcohol
             }
             else
             {
-                // Словарь пуст ПОЛНАЯ ПИЗДА
-                return "ERROR 69";
+                // Словарь пуст
+                return "ERROR";
             }
         }
 
         //Метод возвращает строку с количеством выпитого спирта
-        public static string calculateAlcohol(string containerType, int containerCapacity, int numberOfContainers, int alcoholProcent)
+        public static string calculateAlcohol(Calculating test)
         {
-            return "Container type: " + containerType + "\nCapacity: " + containerCapacity + "\nQuantity: " + numberOfContainers + "\nAlcohol procent: " + alcoholProcent;
-        }    
+            return "Container type: " + test.ContainerType + "\nCapacity: " + test.ContainerCapacity + "\nQuantity: " + test.NumberOfContainers + "\nAlcohol procent: " + test.AlcoholProcent + "\nRESULT: " + test.ContainerCapacity * test.NumberOfContainers * (test.AlcoholProcent / 100) + "ml. of alcohol";
+        }
+        
+        //public static bool 
     }
 }
 

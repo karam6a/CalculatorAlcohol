@@ -26,9 +26,20 @@ namespace CalculatorAlcohol
             InitializeComponent();
             quantityComboBox.IsDropDownOpen = false;
 
+            Calculating.fillComboBoxFromDictionary(typeComboBox);
         }
 
+        private void typeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedValue = typeComboBox.SelectedItem.ToString();
 
+            int EstimatedCapacity = Calculating.findContainerTypeInDictinory(selectedValue);
+
+            if (EstimatedCapacity > 0)
+            {
+                capacityTextField.Text = EstimatedCapacity.ToString();
+            }
+        }
 
 
 
@@ -49,7 +60,7 @@ namespace CalculatorAlcohol
             }
 
             //обработка данных поля с объемом сосуда
-            string containerCapacityText = volumeTextField.Text;
+            string containerCapacityText = capacityTextField.Text;
             int containerCapacity;
             if (string.IsNullOrEmpty(containerCapacityText))
             {
@@ -58,15 +69,15 @@ namespace CalculatorAlcohol
             }
             else
             {
-                if (int.TryParse(volumeTextField.Text, out containerCapacity))
+                if (int.TryParse(capacityTextField.Text, out containerCapacity))
                 {
                     //all good
                 }
                 else
                 {
                     //если поле содержит неверный формат данных
-                    MessageBox.Show("Field Volume cannot contain letters! Put correct data.");
-                    volumeTextField.Text = "";
+                    MessageBox.Show("Field Capacity cannot contain letters! Put correct data.");
+                    capacityTextField.Text = "";
                     return;
                 }
             }
@@ -98,7 +109,7 @@ namespace CalculatorAlcohol
 
             //обработка данных поля с процентным содержанием спирта
             string alcoholProcentText = percentTextBox.Text;
-            int alcoholProcent;
+            float alcoholProcent;
             if (string.IsNullOrEmpty(alcoholProcentText))
             {
                 //делаю проверку на пустую строку
@@ -107,7 +118,7 @@ namespace CalculatorAlcohol
                
             }
             else { 
-                if (int.TryParse(percentTextBox.Text, out alcoholProcent))
+                if (float.TryParse(percentTextBox.Text, out alcoholProcent))
                 {
 
                 }
@@ -120,31 +131,33 @@ namespace CalculatorAlcohol
                 }
             }
             //Проверка на случай если поля с типом и объемом пустые
-            if(typeComboBox.Text == "" && volumeTextField.Text == "")
+            if(typeComboBox.Text == "" && capacityTextField.Text == "")
             {
                 MessageBox.Show("Fields Glass type and Volume in ml cannot be empty together!\n Put data in one of them.");
                 return;
             }
 
 
-            //заполнение конструкторов в зависимости от данных, веденных пользователем 
+            //заполнение конструкторов в зависимости от данных, введенных пользователем 
             if (containerCapacity == 0)
             {
                 Calculating calculatingWithoutCapacity = new Calculating(containerType, numberOfcontainers, alcoholProcent);
+                outputLabel.Content = Calculating.calculateAlcohol(calculatingWithoutCapacity);
 
             }
             else if (containerType == "")
             {
                 Calculating calculatingWithoutType = new Calculating(containerCapacity, numberOfcontainers, alcoholProcent);
+                outputLabel.Content = Calculating.calculateAlcohol(calculatingWithoutType);
             }   
             else
             {
                 Calculating calculatingFullInfo = new Calculating(containerType, containerCapacity, numberOfcontainers, alcoholProcent);
+                outputLabel.Content = Calculating.calculateAlcohol(calculatingFullInfo);
             }
            
         }
 
 
-       
     }
 }
